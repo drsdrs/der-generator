@@ -49,7 +49,7 @@ define (require)->
 
   App.start
     onStart:->
-      articleModule = require "cs!./modules/article/ArticleModule"
+      synthModule = require "cs!./modules/synth/SynthModule"
       #magazinesModule = require "cs!./modules/magazine/MagazineModule"
       settingsModule = require "cs!./modules/settings/SettingsModule"
       # for moduleKey, moduleName of App.config.modules
@@ -66,7 +66,7 @@ define (require)->
 
       done: (e, data) ->
         $.each data.result.files, (index, file) ->
-          $('#files').append '<img src="static/articles/' + file.name + '" />'
+          $('#files').append '<img src="static/synths/' + file.name + '" />'
 
       progressall: (e, data) ->
         progress = parseInt data.loaded / data.total * 100, 10
