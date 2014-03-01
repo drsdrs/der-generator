@@ -1,0 +1,33 @@
+{
+    "config": {
+        "name": "MagazinesModule",
+        "namespace": "magazines"
+    },
+
+    "navigation": {
+        "button": 0,
+        "route": "magazines",
+        "label": "Magazines",
+        "classNames": ""
+    },
+
+    "model": {
+        "article": {
+            "fields" : {
+                "title": {
+                    "type": "text",
+                    "label": "Titel",
+                    "default": "Hello Titel",
+                    "eval": {
+                        "maxLength": "100"
+                    }
+                },
+                "description": {
+                    "type": "text",
+                    "label": "Titel",
+                    "default": "Hello Description"
+                }
+            }
+        }
+    }
+}

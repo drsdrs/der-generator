@@ -1,6 +1,6 @@
 define [
     'marionette'
-    'cs!../../Vent'
+    'cs!../../utilities/Vent'
     'cs!./model/Magazines'
     'cs!./controller/MagazineController'
     "text!./configuration.json"
@@ -20,3 +20,5 @@ define [
       "magazines": "list"
       "magazine/:id": "details"
       "newMagazine": "add"
+
+    Vent.trigger "magazine:ready"

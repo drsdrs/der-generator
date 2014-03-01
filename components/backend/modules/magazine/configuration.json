@@ -1,18 +1,25 @@
 {
     "config": {
-        "name": "MagazinesModule",
-        "namespace": "magazines"
+        "name": "MagazineModule",
+        "namespace": "magazine"
     },
-
     "navigation": {
         "button": 0,
         "route": "magazines",
-        "label": "Magazines",
-        "classNames": ""
+        "label": "Magazine--label",
+        "classNames": "magazines"
+    },
+
+    "settings": {
+        "title" : {
+            "type": "text",
+            "label": "Titel",
+            "default": "Hello Titel"
+        }
     },
 
     "model": {
-        "article": {
+        "magazine": {
             "fields" : {
                 "title": {
                     "type": "text",

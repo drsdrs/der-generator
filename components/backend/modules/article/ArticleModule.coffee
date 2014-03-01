@@ -1,6 +1,6 @@
 define [
     'marionette'
-    'cs!../../Vent'
+    'cs!../../utilities/Vent'
     'cs!./model/Articles'
     'cs!./controller/ArticleController'
     "text!./configuration.json"
@@ -8,7 +8,7 @@ define [
 ( Marionette, Vent, Articles, Controller, Config ) -> 
 
   
-  Vent.on "app:ready", ()->   
+  Vent.on "app:ready", ()->
   
     Vent.trigger "app:addModule", JSON.parse Config
   
@@ -20,4 +20,6 @@ define [
       "articles": "list"
       "article/:id": "details"
       "newArticle": "add"
+      
+    Vent.trigger "article:ready"
       
