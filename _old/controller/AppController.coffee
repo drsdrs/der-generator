@@ -9,8 +9,5 @@ define [
 
   class AppController extends Backbone.Marionette.Controller
 
-    settings: ->
-      c.l "sett up controller"
-
     welcome: ->
-      console.log new SynthView
+      c.l "say welcome"

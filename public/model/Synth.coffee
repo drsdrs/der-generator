@@ -1,9 +1,8 @@
-define ['jquery', 'underscore', 'backbone'], ($, _, Backbone) ->
+define ['underscore'], (_) ->
 
-  class Synth extends Backbone.Model
-    idAttribute: "_id"
-    urlRoot: "synths"
-    defaults:
-      "title": "Neuer Synth"
-      "pos": 0
+  class Synth
+    constructor: ()->
+      @name= "Neuer Synth"+ ~~(Math.random()*1024<<6)
+      @pos= 0
+      @id= -(Date.now()<<6 | Math.random()*64)
 

@@ -13,12 +13,8 @@ define [
 
   class SynthController extends Backbone.Marionette.Controller
 
-    details: (id) ->
-      synth = App.Synths.where _id: id
-      Vent.trigger 'app:updateRegion', "contentRegion", new SynthDetailView model: synth[0]
-
     add: ->
-      view = new SynthDetailView model: new Synth
+      view = new SynthView model: new Synth
       Vent.trigger 'app:updateRegion', 'contentRegion', view
       view.toggleEdit()
 

@@ -9,4 +9,4 @@ define [
   class AppRouter extends Marionette.AppRouter
     controller: new Controller
     appRoutes:
-      "": "index"
+      "": "welcome"

@@ -8,6 +8,7 @@ require.config({
 		marionette: "marionette/lib/core/amd/backbone.marionette",
 		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
 		babysitter: "backbone.babysitter/lib/amd/backbone.babysitter",
+		localstorage: "backbone.localStorage//backbone.localStorage",
 		text: 'requirejs-text/text',
 		tpl: 'requirejs-tpl/tpl',
 		cs: 'require-cs/cs',
@@ -16,7 +17,8 @@ require.config({
     map: {
         "*": {
             "backbone.wreqr": "wreqr",
-            "backbone.babysitter": "babysitter"
+            "backbone.babysitter": "babysitter",
+            "backbone.localStorage": "localstorage"
         }
     },
 	packages: [
