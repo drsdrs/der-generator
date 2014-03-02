@@ -2,9 +2,10 @@ define [
   'jquery'
   'underscore'
   'backbone'
-  ],
+  ],($, _, Backbone) ->
 
-($, _, Backbone) ->
-  class Synth
-    constructor: (@name, @pos) ->
-      @id = _.now
+  class Synth extends Backbone.Model
+    default:
+      name: "default"
+
+

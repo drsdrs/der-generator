@@ -5,11 +5,20 @@ require.config({
 		jquery: "jquery/dist/jquery",
 		underscore: "underscore-amd/underscore",
 		backbone: "backbone-amd/backbone",
+		marionette: "marionette/lib/core/amd/backbone.marionette",
+		wreqr: "backbone.wreqr/lib/amd/backbone.wreqr",
+		babysitter: "backbone.babysitter/lib/amd/backbone.babysitter",
 		text: 'requirejs-text/text',
 		tpl: 'requirejs-tpl/tpl',
 		cs: 'require-cs/cs',
 		fileupload: 'lib/blueimp-file-upload/js/jquery.fileupload'
 	},
+    map: {
+        "*": {
+            "backbone.wreqr": "wreqr",
+            "backbone.babysitter": "babysitter"
+        }
+    },
 	packages: [
       {
         name: 'less',

@@ -1,21 +1,16 @@
 define [
     'jquery'
-    'lodash'
+    'underscore'
     'backbone'
     'marionette'
-    'cs!../view/WelcomeView'
-    'cs!../view/LoginView'
+    'cs!../view/SynthView'
 ],
-($, _, Backbone, Marionette, WelcomeView, LoginView ) ->
+($, _, Backbone, Marionette, SynthView) ->
 
   class AppController extends Backbone.Marionette.Controller
 
-    generator: ->
-      $.get "generator", (data) -> console.log data
-
     settings: ->
-      App.overlayRegion.show new LoginView
+      c.l "sett up controller"
 
     welcome: ->
-      console.log new WelcomeView
-      App.contentRegion.show new WelcomeView
+      console.log new SynthView
