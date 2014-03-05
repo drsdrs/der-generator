@@ -1,6 +1,10 @@
 <div id="<%- model.id %>">
-	<h1><%- model.name %></h1>
-	<h2><%- model.name %></h2>
-	<p>ID: <%- model.id %></p>
-	<p>Position: <%- model.pos %></p>
+	<span>Name:
+		<input class="changeName" value="<%- model.name %>" type="text"</h2>
+	</span>
+	<select>
+		<option>Select Generator</option>
+		<% _.each(model.synthParams, function(gen, i) { %>  <option><%= i %></option> <% }); %>
+	</select>
+	<input type="button" id="addGenerator" value="add"/>
 </div>

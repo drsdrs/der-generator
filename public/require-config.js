@@ -3,6 +3,8 @@ require.config({
 	baseUrl: '/lib',
 	paths: {
 		jquery: "jquery/dist/jquery",
+		d3: "d3-amd/d3",
+		audiolib: "./../audiolib/audiolib",
 		underscore: "underscore-amd/underscore",
 		backbone: "backbone-amd/backbone",
 		marionette: "marionette/lib/core/amd/backbone.marionette",

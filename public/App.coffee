@@ -1,24 +1,63 @@
-window.c=console;c.l=c.log
-
-
+window.c=console;c.l=c.log;c.w=c.warn
 
 define (require)->
   $ = require 'jquery'
   _ = require 'underscore'
-  localstorage = require 'localstorage'
+  d3 = require 'd3'
+
   Synth = require 'cs!./model/Synth'
+  Seq = require 'cs!./model/Seq'
   Nav = require 'cs!./model/Nav'
-  View = require 'cs!./view/View'
+
+  synthParams = require 'cs!./model/synthParams'
+
+  ListView = require 'cs!./view/ListView'
+  DetailView = require 'cs!./view/DetailView'
+  SynthDetailView = require 'cs!./view/SynthDetailView'
+  SeqDetailView = require 'cs!./view/SeqDetailView'
+  NavView = require 'cs!./view/NavView'
+  BoldView = require 'cs!./view/NavView'
+
   synthViewTpl = require 'text!./templates/synthItem.html'
   navViewTpl = require 'text!./templates/navItem.html'
-  detailSynthTpl = require 'text!./templates/detailSynth.html'
+
   manualTpl = require 'text!./templates/manual.html'
   style = require 'less!./style.less'
 
-  navSelect = ""
 
   app = {}
   app.collections = {}
+  app.synthParams = synthParams;
+  app.navSelect = ""
+
+  app.changeMainView = (navName) ->
+    if app.navSelect == navName then return
+    navSelect = navName
+    $("#detailView").fadeOut 150, ->
+      $(@).html("").fadeIn(150)
+    $("#listView").fadeOut 150, ->
+      $(@).html("").fadeIn(150)
+
+      if navName=="synth"
+        app.listView = new ListView($("#listView") , "synths", synthViewTpl, Synth)
+        app.detailView = new SynthDetailView($("#detailView") , "synths")
+        app.listView.initialize()
+        app.detailView.initEvents()
+
+      else if navName=="manual"
+        app.detailView = new DetailView($("#detailView"))
+        app.detailView.tpl = manualTpl
+        app.detailView.render()
+
+      else if navName=="seq"
+        app.listView = new ListView($("#listView"), "seqs", synthViewTpl, Seq)
+        app.detailView = new SeqDetailView($("#detailView"), "seqs")
+        app.listView.initialize()
+
+
+  window.app = app
+
+
   app.collections.synths = [
     new Synth()
     new Synth()
@@ -32,68 +71,14 @@ define (require)->
   ]
 
   app.collections.seqs = [
-    new Synth("seq-sequence-1")
-    new Synth("seq-sequence-34")
-    new Synth("seq-sequence-5")
+    new Seq("seq-sequence-1")
+    new Seq("seq-sequence-34")
+    new Seq("seq-sequence-5")
   ]
 
-
-  class NavView extends View
-    initEvents: ->
-      c.l "init nav"
-      @target.find("span").click (e)->
-        navName = e.target.className
-        app.changeMainView(navName)
-
-  class ListView extends View
-
-  class DetailView extends View
-    initEvents: ->
-      null
-    showDetail: (model)->
-      c.l "init detail"
-      @el = @renderItem(model)
-      @render()
-    render: ->
-      @target.html("").html(@el||@tpl)
-      @el=""
-
   app.navView = new NavView($("#navView"), "navs", navViewTpl)
-
-
-
-  app.changeMainView = (navName) ->
-    if navSelect == navName then return c.l "already on this site"
-    navSelect = navName
-    $("#detailView").slideUp 250, ->
-      $(@).html("").slideDown(250)
-    $("#listView").slideUp 250, ->
-      $(@).html("").slideDown(250)
-      if navName=="synth"
-        app.synthView = new ListView($("#listView"), "synths", synthViewTpl, Synth)
-        app.detailView = new DetailView($("#detailView"), null , detailSynthTpl)
-        app.synthView.initialize()
-      else if navName=="manual"
-        app.manualView = new DetailView($("#detailView"), null, manualTpl)
-        app.manualView.render()
-      else if navName=="seq"
-        app.seqView = new View($("#listView"), "seqs", synthViewTpl, Synth)
-        app.detailView = new DetailView($("#detailView"), null , detailSynthTpl)
-        app.seqView.initialize()
-
-
-  addSynth = ->
-    app.synths.push(newItem)
-    app.view.renderItem(newItem)
-
-  editItem = (model)->
-    false
-
-  removeItem = (model)->
-    false
-
-
-
-  window.app = app
   app.navView.initialize()
-  $("body").show(250)
+
+  $("body").show(50)
+
+  app.changeMainView("synth")

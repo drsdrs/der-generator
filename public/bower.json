@@ -14,7 +14,8 @@
     "require-cs": "~0.4.4",
     "require-less": "~0.1.1",
     "requirejs-tpl": "*",
-    "backbone.localStorage": "~1.1.7"
+    "backbone.localStorage": "~1.1.7",
+    "d3-amd": "~3.3.9"
   },
   "devDependencies": {
     "requirejs": "latest"

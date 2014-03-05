@@ -5,6 +5,7 @@ var express = require('express'),
 app.configure(function() {
 	app.use(express.static('public'));
 	app.use('/lib', express.static(__dirname + '/public/bower_components'));
+	app.use('/audiolib', express.static(__dirname + '/node_modules/audiolib/lib/'));
 	app.use(express.cookieParser());
 	app.use(express.bodyParser({
           keepExtensions: true,
