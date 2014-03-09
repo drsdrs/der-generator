@@ -8,18 +8,18 @@ app.configure(function() {
 	app.use('/audiolib', express.static(__dirname + '/node_modules/audiolib/lib/'));
 	app.use(express.cookieParser());
 	app.use(express.bodyParser({
-          keepExtensions: true,
-          limit: 15000000, // 10M limit
-          defer: true
-    }));
+					keepExtensions: true,
+					limit: 15000000, // 10M limit
+					defer: true
+		}));
 
 	//routes.setup(app);
 });
 
 
 app.get('/', function(req, res){
-  app.use('/', express.static(__dirname + '/public/'));
-  res.sendfile('./public/index.html');
+	app.use('/', express.static(__dirname + '/public/'));
+	res.sendfile('./public/index.html');
 });
 
 app.listen(3333);
