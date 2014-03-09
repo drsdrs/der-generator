@@ -9,7 +9,7 @@ define (require)->
   Seq = require 'cs!./model/Seq'
   Nav = require 'cs!./model/Nav'
 
-  synthParams = require 'cs!./model/synthParams'
+  synthParams = require 'text!./model/synthParams.json'
 
   ListView = require 'cs!./view/ListView'
   DetailView = require 'cs!./view/DetailView'
@@ -24,10 +24,17 @@ define (require)->
   manualTpl = require 'text!./templates/manual.html'
   style = require 'less!./style.less'
 
+  window.isEmpty = (obj) ->
+    return true  unless obj?
+    return false  if obj.length > 0
+    return true  if obj.length is 0
+    for key of obj
+      return false  if Object::hasOwnProperty.call(obj, key)
+    true
 
   app = {}
   app.collections = {}
-  app.synthParams = synthParams;
+  app.synthParams = JSON.parse(synthParams)
   app.navSelect = ""
 
   app.changeMainView = (navName) ->
@@ -39,7 +46,9 @@ define (require)->
       $(@).html("").fadeIn(150)
 
       if navName=="synth"
-        app.listView = new ListView($("#listView") , "synths", synthViewTpl, Synth)
+        app.listView = new ListView(
+          $("#listView"), "synths", synthViewTpl, Synth
+        )
         app.detailView = new SynthDetailView($("#detailView") , "synths")
         app.listView.initialize()
         app.detailView.initEvents()

@@ -20,12 +20,12 @@ define [
         model.addGen("Keyboard")
         model.addGen("Oscillator")
         model.addGen("ADSREnvelope")
-        model.addGen("Delay")
-        model.addGen("Output")
+        model.addGen("Chorus")
+        #model.addGen("Output")
       @renderSvgSynthDetail(model)
 
     renderSvgSynthDetail: (model) ->
-      generatorView = new GeneratorView(model.generators, @target)
+      generatorView = new GeneratorView(model, @target)
       generatorView.initialize()
 
     addGenerator: ()->

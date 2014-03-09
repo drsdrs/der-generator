@@ -11,7 +11,9 @@ define [
       @target.find("select").change (e)->
         if e.target.selectedIndex==0 then return
         seqModel = that.findItem(e.target.parentElement.id)
-        synthModel = that.findItem(e.target[e.target.selectedIndex].className, "synths")
+        synthModel = that.findItem(
+          e.target[e.target.selectedIndex].className, "synths"
+        )
         seqModel.selSynth = synthModel
 
     showDetail: (model)->
@@ -22,5 +24,6 @@ define [
       ## set option select element
       select = @target.find("select")[0]
       index = 0
-      _.each select, (sel, i, ins)-> return index=i if model.selSynth.id == parseInt(sel.className)
+      _.each select, (sel, i, ins)->
+        return index=i if model.selSynth.id == parseInt(sel.className)
       $("."+model.selSynth.id).attr('selected', index)
