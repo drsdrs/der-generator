@@ -1,0 +1,30 @@
+<% _.each(model, function(col) { %>
+
+	<div class="sCol">
+	<% _.each(col, function(row) { %>
+
+		<div class="sCell <%= row[0].colorG %> <%= row[0].param %>">
+			<h4><%= row[0].label %></h4>
+
+			<% if(row[0].type=="slider") { %>
+
+				<input class="fader" type="range" step="<%= row[0].step %>" min="<%= row[0].range[0] %>" max="<%= row[0].range[1] %>"/>
+				<span class="lowNum"> <%= row[0].range[0] %> </span>
+				<span class="highNum"><%= row[0].range[1] %></span>
+				<input class="param" hidden readonly value="<%= row[0].param %>">
+				<input class="numVal" type="text" min="<%= row[0].range[0] %>" max="<%= row[0].range[1] %>" />
+
+			<% } else { %>
+				<% _.each(row[0].values, function(btn) { %>
+					<input class="param" hidden readonly value="<%= row[0].param %>">
+					<input type="button" class="btn" value="<%= btn %>" />
+
+				<% }); %>
+					<input type="text" class="waveInfo" value="<%= row[0].value %>" readonly />
+			<% } %>
+
+		</div>
+	<% }); %>
+
+	</div>
+<% }); %>

@@ -2,9 +2,17 @@
 	<span>Name:
 		<input class="changeName" value="<%- model.name %>" type="text"</h2>
 	</span>
+
+	<select class="changeSynth">
+		<option>Change Synth</option>
+		<% _.each(app.synthParams, function(gen, i) { %>  <option><%= i %></option> <% }); %>
+	</select>
 	<select>
-		<option>Select Generator</option>
+		<option>Select Effect</option>
 		<% _.each(model.synthParams, function(gen, i) { %>  <option><%= i %></option> <% }); %>
 	</select>
-	<input type="button" id="addGenerator" value="add"/>
+
+	<input type="button" id="addEffect" value="ADD Effect"/>
+	<div class="synthParamWrap"></div>
+
 </div>

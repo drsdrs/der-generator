@@ -9,7 +9,8 @@ define (require)->
   Seq = require 'cs!./model/Seq'
   Nav = require 'cs!./model/Nav'
 
-  synthParams = require 'text!./model/synthParams.json'
+  synthParams = require 'cs!./model/synthParams.coffee'
+  fxParams = require 'cs!./model/fxParams.coffee'
 
   ListView = require 'cs!./view/ListView'
   DetailView = require 'cs!./view/DetailView'
@@ -34,7 +35,8 @@ define (require)->
 
   app = {}
   app.collections = {}
-  app.synthParams = JSON.parse(synthParams)
+  app.synthParams = synthParams
+  app.fxParams = fxParams
   app.navSelect = ""
 
   app.changeMainView = (navName) ->
@@ -68,9 +70,9 @@ define (require)->
 
 
   app.collections.synths = [
-    new Synth()
-    new Synth()
-    new Synth()
+    new Synth("superSAWtooth")
+    new Synth("saeure")
+    new Synth("auf erz")
   ]
 
   app.collections.navs = [
@@ -79,15 +81,11 @@ define (require)->
     new Nav("Manual", "manual")
   ]
 
-  app.collections.seqs = [
-    new Seq("seq-sequence-1")
-    new Seq("seq-sequence-34")
-    new Seq("seq-sequence-5")
-  ]
+  app.collections.seqs = [ new Seq("seq-sequence-1") ]
 
   app.navView = new NavView($("#navView"), "navs", navViewTpl)
   app.navView.initialize()
 
-  $("body").show(50)
+  $(".body").show(50)
 
   app.changeMainView("synth")

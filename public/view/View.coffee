@@ -33,9 +33,10 @@ define [
       @initEvents()
       @el=""
 
-    renderItem: (model) ->
+    renderItem: (model, tpl) ->
+      tpl = tpl || @tpl
       _.templateSettings.variable = "model"
-      template = _.template(@tpl)
+      template = _.template(tpl)
       template(model)
 
     renderAllItems: ()->

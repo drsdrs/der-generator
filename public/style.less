@@ -1,25 +1,23 @@
 #navView {
   background: #ff8;
 }
+
 #listView {
   background: #f88;
   display: inline-block;
   float: left;
   width: 30%;
+  max-width: 300px;
   div {
     background: #f88;
     border-bottom: 1px solid black;
     padding: 6px;
-
   }
 }
+
 #navView {
   background: #8f8;
-  svg {
-    width:100%;
-    height:100%
-    background: blue;
-  }
+
   div {
     display: inline-block;
     padding: 6px 6px 0 6px;
@@ -30,7 +28,64 @@
 
 #detailView {
   width: 70%;
-  background: #aaa;
+  background: #AB9FE9;
   height: 100%;
   float: left;
+}
+
+// SynthParams Style //
+
+.synthParamWrap {
+
+  .sCol {
+    width: 160px;
+    display: inline-block;
+    border-top:4px solid black;
+    float: left;
+
+    .synthParamGroup-A { background: #E68000; }
+    .synthParamGroup-B { background: #E69B00; }
+    .synthParamGroup-C { background: #E6B600; }
+    .synthParamGroup-D { background: #E6CD00; }
+    .synthParamGroup-E { background: #E6E400; }
+    .synthParamGroup-F { background: #9CE600; }
+    .synthParamGroup-G { background: #05FF9C; }
+
+    .sCell {
+      padding: 4px 8px 4px 4px;
+      height: auto;
+      border:1px solid black;
+      text-align: center;
+
+      h4 { margin: 2px; }
+
+      input[type="button"]{
+        width: 45%;
+        height: 17.5px;
+        font-size: 10px;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .waveInfo {
+        text-align: center;
+        border: 1px solid black;
+        background: rgba(0,0,0,0.2);
+        width: 90%;
+      }
+
+      .lowNum { float: left; }
+      .highNum { float: right; }
+      .fader { width:100%;  }
+      .numVal {
+        width: 50%;
+        text-align:center;
+        clear:both;
+      }
+
+
+
+
+    }
+  }
 }
