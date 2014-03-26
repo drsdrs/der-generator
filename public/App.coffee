@@ -6,20 +6,23 @@ define (require)->
   d3 = require 'd3'
 
   Synth = require 'cs!./model/Synth'
+  Drumkit = require 'cs!./model/Drumkit'
   Seq = require 'cs!./model/Seq'
   Nav = require 'cs!./model/Nav'
 
-  synthParams = require 'cs!./model/synthParams.coffee'
-  fxParams = require 'cs!./model/fxParams.coffee'
+  synthParams =   require 'cs!./model/synthParams.coffee'
+  drumkitParams = require 'cs!./model/drumkitParams.coffee'
+  fxParams =      require 'cs!./model/fxParams.coffee'
 
-  ListView = require 'cs!./view/ListView'
-  DetailView = require 'cs!./view/DetailView'
-  SynthDetailView = require 'cs!./view/SynthDetailView'
-  SeqDetailView = require 'cs!./view/SeqDetailView'
-  NavView = require 'cs!./view/NavView'
-  BoldView = require 'cs!./view/NavView'
+  ListView =          require 'cs!./view/ListView'
+  DetailView =        require 'cs!./view/DetailView'
+  SynthDetailView =   require 'cs!./view/SynthDetailView'
+  SeqDetailView =     require 'cs!./view/SeqDetailView'
+  DrumkitDetailView = require 'cs!./view/DrumkitDetailView'
+  NavView =           require 'cs!./view/NavView'
+  BoldView =          require 'cs!./view/NavView'
 
-  synthViewTpl = require 'text!./templates/synthItem.html'
+  synthItemTpl = require 'text!./templates/synthItem.html'
   navViewTpl = require 'text!./templates/navItem.html'
 
   manualTpl = require 'text!./templates/manual.html'
@@ -35,7 +38,9 @@ define (require)->
 
   app = {}
   app.collections = {}
+  app.drumkitParams = drumkitParams
   app.synthParams = synthParams
+  _.each synthParams, (val, key) -> require ["cs!./synthPlugins/"+key]
   app.fxParams = fxParams
   app.navSelect = ""
 
@@ -49,7 +54,7 @@ define (require)->
 
       if navName=="synth"
         app.listView = new ListView(
-          $("#listView"), "synths", synthViewTpl, Synth
+          $("#listView"), "synths", synthItemTpl, Synth
         )
         app.detailView = new SynthDetailView($("#detailView") , "synths")
         app.listView.initialize()
@@ -61,27 +66,28 @@ define (require)->
         app.detailView.render()
 
       else if navName=="seq"
-        app.listView = new ListView($("#listView"), "seqs", synthViewTpl, Seq)
+        app.listView = new ListView($("#listView"), "seqs", synthItemTpl, Seq)
         app.detailView = new SeqDetailView($("#detailView"), "seqs")
         app.listView.initialize()
 
+      else if navName=="drums"
+        app.listView = new ListView($("#listView"), "drumkits", synthItemTpl, Drumkit)
+        app.detailView = new DrumkitDetailView($("#detailView"), "drumkits")
+        app.listView.initialize()
 
   window.app = app
 
 
-  app.collections.synths = [
-    new Synth("superSAWtooth")
-    new Synth("saeure")
-    new Synth("auf erz")
-  ]
-
   app.collections.navs = [
+    new Nav("Drums", "drums")
     new Nav("Synths", "synth")
     new Nav("Sequencers", "seq")
     new Nav("Manual", "manual")
   ]
 
+  app.collections.synths = [ new Synth("superSAWtooth") ]
   app.collections.seqs = [ new Seq("seq-sequence-1") ]
+  app.collections.drumkits = [ new Drumkit() ]
 
   app.navView = new NavView($("#navView"), "navs", navViewTpl)
   app.navView.initialize()

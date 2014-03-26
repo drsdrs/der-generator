@@ -19,6 +19,7 @@ define [
     showDetail: (model)->
       @el = @renderItem(model)
       @render()
+
     render: ->
       @target.html("").html(@el||@tpl)
       @el=""

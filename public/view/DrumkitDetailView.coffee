@@ -1,28 +1,23 @@
 define [
   'jquery'
   'underscore'
-  'text!../templates/synthDetail.html'
+  'text!../templates/drumkitDetail.html'
   'text!../templates/synthParams.html'
 
   'cs!./DetailView'
   "cs!./SynthDetailFxView"
 
 ], ($, _, tpl, synthParamTpl, DetailView, SynthDetailFxView) ->
-  class SynthDetailView extends DetailView
+  class DrumkitDetailView extends DetailView
     tpl: tpl
 
-    initFxView: ->
-      @fxView = new SynthDetailFxView()
-      @fxView.model = @model
-      @fxView.target = $(".synthFxWrap")
-      @fxView.init()
 
     initOtherEvents: ->
       setSynth = (e)->
         @model.synth = e.target.value
         html = @renderSynthParams(e.target.value)
         $(".synthParamWrap").html(html)
-        @model.synthParams = null
+        @model.drumkitParams = null
         @showDetail()
         @initOtherEvents()
       @target.find("#addEffect").click @addFx.bind(@)
@@ -33,19 +28,38 @@ define [
       c.l "Show Details", model
       @el = @renderItem(model)
       @render()
-      paramsEl = @renderSynthParams(model.synth)
-      $(".synthParamWrap").html(paramsEl)
-      @initSynthParamEvents()
-      @initFxView()
+      paramsEl = ""
+      len = 0
+      while len<@model.drums.length
+        if len==0 then paramsEl += '<hr>'
+        paramsEl += '<div class='+@model.drums[len].id+'><h3 class="drumName">'+@model.drums[len].name+'</h3>'
+        paramsEl += @renderSynthParams(@model.drums[len])
+        paramsEl += '</div><hr>'
+        len++
+      $(".drumDetailList").html(paramsEl)
+      #@initSynthParamEvents()
+      #@initFxView()
       @initRealSynth()
-      $("body").unbind("keyup").keyup @setOscFreq.bind(@)
+      $("body").unbind("keyup").keyup @playSample.bind(@)
 
-
-    setOscFreq: (e)->
+    playSample: (e)->
       if e.target.tagName=="INPUT" then return true
-      noteFreq = e.keyCode * 3
-      @model.osc.setFreq(noteFreq)
-      @target.find(".setFreq .fader").val(noteFreq).trigger("change")
+      drums = @model.drums
+      k = e.keyCode
+      c.l drums
+      if k==49||k==81||k==65||k==90
+        drums[0].gen.noteOn(160, 0.8)
+        $('.'+drums[0].id+" h3").animate({width:"25%"}, 100, "swing", -> $(this).animate({width:"100%"}, 100) )
+      else if k==50||k==87||k==83||k==88
+        drums[1].gen.noteOn(160, 0.8)
+        $('.'+drums[1].id+" h3").animate({width:"25%"}, 100, "swing", -> $(this).animate({width:"100%"}, 100) )
+      else if k==51||k==69||k==68||k==67
+        drums[2].gen.noteOn(260, 0.8)
+        $('.'+drums[2].id+" h3").animate({width:"25%"}, 100, "swing", -> $(this).animate({width:"100%"}, 100) )
+      else if k==52||k==82||k==70||k==86
+        drums[3].gen.noteOn(360, 0.8)
+        $('.'+drums[3].id+" h3").animate({width:"25%"}, 100, "swing", -> $(this).animate({width:"100%"}, 100) )
+
 
     addFx: ->
       name = @target.find(".selectFx").val()
@@ -53,27 +67,25 @@ define [
       if !audioLib[name]? then return c.w "no such fx here"
       fx =
         id: (parseInt((1024^Math.random()*1024).toString()+Date.now().toString()))
-        name: name
+        name: namev
         params: null
         fx: gen()
-      c.l fx
       @model.fxs.push(fx)
-      @initFxView()
-      @setAllFxParams()
-      @initRealSynth()
+
 
     renderSynthParams: (synth)->
-      synthParams = app.synthParams[synth]
-      if !synthParams? then return c.w "no such synth in synthParams"
-      modelSynthParams = @model.synthParams
-      if !modelSynthParams?
+      that = @
+      drumkitParams = app.drumkitParams.basicKit
+      modelDrumkitParams = @model.drums[0].drumkitParams
+      if !modelDrumkitParams?
         c.l "INIT Synth Params"
-        modelSynthParams = {}
-        _.each synthParams, (col)->
+        modelDrumkitParams = {}
+        _.each drumkitParams, (col)->
           _.each col, (data)->
-            modelSynthParams[data[0].param] = data[0].value
-        @model.synthParams = modelSynthParams
-      @renderItem(synthParams, synthParamTpl) # renderSynthParamView
+            modelDrumkitParams[data[0].param] = data[0].value
+        _.each @model.drums, (d, i)->
+          that.model.drums[i].drumkitParams = modelDrumkitParams
+      @renderItem(drumkitParams, synthParamTpl) # renderSynthParamView
 
     initSynthParamEvents: ()->
       chSlider = (e)->
@@ -83,7 +95,7 @@ define [
         val = parseFloat(e.target.value)
         parent.find(".numVal").val(val)
         @model.osc[param](val)
-        @model.synthParams[param]=val
+        @model.drumkitParams[param]=val
       chNumVal = (e)->
         c.l "change val"
         parent = $(e.target.parentNode)
@@ -91,14 +103,14 @@ define [
         val = parseFloat(e.target.value)
         parent.find(".fader").val(val)
         @model.osc[param](val)
-        @model.synthParams[param]=val
+        @model.drumkitParams[param]=val
       chParamButton = (e)->
         parent = $(e.target.parentNode)
         param = parent.find(".param").val()
         val = e.target.value
         parent.find(".waveInfo").val(val)
         @model.osc[param](val)
-        @model.synthParams[param]=val
+        @model.drumkitParams[param]=val
 
       @target.find(".fader").change chSlider.bind(@)
       @target.find(".numVal").change chNumVal.bind(@)
@@ -106,13 +118,17 @@ define [
 
     initRealSynth: ()->
       if app.synthDev? then app.synthDev.kill()
-      fxs = @model.fxs
+      drums = @model.drums
+      #fxs = @model.fxs
       audioCallback= (buffer, channelCount) ->
-        osc.append buffer, channelCount
-        len = fxs.length; i=0
-        while i<len
-          fxs[i].fx.append buffer, channelCount
-          i++
+        #osc.append buffer, channelCount
+        i = drums.length
+        while i--
+          drums[i].gen.append buffer, channelCount
+
+          # while i<len
+            # fxs[i].fx.append buffer, channelCount
+            # i++
 
       dev = audioLib.AudioDevice(audioCallback, 2, 1024<<2)
       dev.kill = ->
@@ -120,20 +136,20 @@ define [
         dev.off()
         dev = null
 
-      osc = audioLib[@model.synth](dev.sampleRate, 440, 44, 0.005)
-      len = @model.fxs.length; i=0
-      while i<len
-        @model.fxs[i].fx = audioLib[@model.fxs[i].name](dev.sampleRate)
-        i++
+      #osc = audioLib[@model.synth](dev.sampleRate, 440, 44, 0.005)
+      # len = @model.fxs.length; i=0
+      # while i<len
+        # @model.fxs[i].fx = audioLib[@model.fxs[i].name](dev.sampleRate)
+        # i++
 
       app.synthDev = dev
-      @model.osc = osc
-      @setAllSynthParams(osc)
-      @setAllFxParams()
+      #@model.osc = osc
+      #@setAllSynthParams(osc)
+      #@setAllFxParams()
 
     setAllSynthParams: (osc)->
       osc = osc || @model.osc
-      _.each @model.synthParams, (val, key)->
+      _.each @model.drumkitParams, (val, key)->
         osc[key](val)
         if typeof(val)!="string" then $("."+key+" .fader, ."+key+" .numVal").val(val)
         else $("."+key+" .waveInfo").val(val)
@@ -141,7 +157,6 @@ define [
     setAllFxParams: ()->
       _.each @model.fxs, (fx)->
         _.each fx.params, (val, key)->
-          c.l val, key
           if typeof(val)!="string"
             $("."+fx.id+" ."+key+" .fader, ."+fx.id+" ."+key+" .numVal").val(val)
             $("."+fx.id+" ."+key+" .fader, ."+fx.id+" ."+key+" .numVal").trigger("change")

@@ -33,10 +33,9 @@
   float: left;
 }
 
-// SynthParams Style //
-
-.synthParamWrap {
-
+.synthParamWrap, .synthFxWrap, .drumDetailList {
+  width: 100%;
+  display: inline-block;
   .sCol {
     width: 160px;
     display: inline-block;
@@ -53,7 +52,7 @@
 
     .sCell {
       padding: 4px 8px 4px 4px;
-      height: auto;
+      //height: auto;
       border:1px solid black;
       text-align: center;
 
@@ -82,10 +81,33 @@
         text-align:center;
         clear:both;
       }
-
-
-
-
     }
   }
+}
+
+.drumDetailList {
+  .drumName {
+    margin: 0px;
+    background:black;
+    color:white;
+  }
+
+  .sCol {
+      float: none;
+  }
+  .sCell {
+      float: left;
+      height: 85px;
+      width: 146px;
+  }
+}
+
+.synthFxWrap {
+  .synthParamGroup-A { background: #E68; }
+  .synthParamGroup-B { background: #E69; }
+  .synthParamGroup-C { background: #E6B; }
+  .synthParamGroup-D { background: #E6C; }
+  .synthParamGroup-E { background: #E6E; }
+  .synthParamGroup-F { background: #9CE; }
+  .synthParamGroup-G { background: #05F; }
 }

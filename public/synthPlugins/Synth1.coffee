@@ -49,9 +49,13 @@ define [], ->
             @oscAmp.generate()
             @oscPitch.generate()
 
-            @oscA.pulseWidth = (@oscPhase.getMix()/2+0.5)
+            @oscA.pulseWidth = 0.5 + (@oscPhase.getMix()/2+0.5)*@mixPhase
 
-            @setDetune(@frequency*@oscPitch.getMix()/32)
+            pitchMod = 1+@oscPitch.getMix()*@mixPitch
+
+            @oscA.frequency = @frequency * pitchMod
+            @oscB.frequency = (@frequency - @detune) * pitchMod
+            @oscC.frequency = (@frequency + @detune) * pitchMod
 
           setVol: (vol) -> @vol = vol
           setVolA: (vol) -> @volA = vol
@@ -79,6 +83,7 @@ define [], ->
             @oscA.frequency = freq
             @oscB.frequency = freq - @detune
             @oscC.frequency = freq + @detune
+            @resetAll()
 
           setDetune: (detune) ->
             @detune = detune
@@ -86,13 +91,14 @@ define [], ->
             @oscB.frequency = @frequency - detune
             @oscC.frequency = @frequency + detune
 
-          trigger: -> @resetAll()
+          #trigger: -> @resetAll()
           resetAll: ->
+            @oscAmp.reset()
             @oscPhase.reset()
+            @oscPitch.reset()
             @oscA.reset()
             @oscB.reset()
             @oscC.reset()
-            @oscAmp.reset()
 
 
         audioLib.generators "Synth1", Synth1

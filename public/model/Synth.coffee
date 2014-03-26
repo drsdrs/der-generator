@@ -9,8 +9,8 @@ define  ["underscore",  "audiolib"],  (_)  ->
       constructor:  (@name)->
           @name =  @name  ||  "Neuer  Synth"+  ~~(Math.random()*1024)
           @id =  (parseInt((1024^Math.random()*1024).toString()+Date.now().toString()))
-          @synth  =  @synth || "BasicSynth"
-          @fxs  =  ["Chorus","Delay"]
+          @synth  =  @synth || "Synth1"
+          @fxs  =  [ id: 666, name:"Delay", params: null]
 
       addFx:  (type)->
           fx = audioLib[@type]

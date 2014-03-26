@@ -7,12 +7,15 @@
 		<option>Change Synth</option>
 		<% _.each(app.synthParams, function(gen, i) { %>  <option><%= i %></option> <% }); %>
 	</select>
-	<select>
+	<select class="selectFx">
 		<option>Select Effect</option>
-		<% _.each(model.synthParams, function(gen, i) { %>  <option><%= i %></option> <% }); %>
+		<% _.each(app.fxParams, function(gen, i) { %>  <option><%= i %></option> <% }); %>
 	</select>
 
 	<input type="button" id="addEffect" value="ADD Effect"/>
-	<div class="synthParamWrap"></div>
+
+	<div class="drumDetailList">
+
+	</div>
 
 </div>

@@ -1,11 +1,7 @@
+<% console.log("model", model) %>
 <% _.each(model, function(col) { %>
 
-	<div class="sCol <%= model.id || "" %>">
-
-	<% if(model.name) { %>
-		<h4> <%= model.name %> </h4>
-	<% } %>
-
+	<div class="sCol">
 	<% _.each(col, function(row) { %>
 
 		<div class="sCell <%= row[0].colorG %> <%= row[0].param %>">
@@ -19,10 +15,6 @@
 				<input class="param" hidden readonly value="<%= row[0].param %>">
 				<input class="numVal" type="text" min="<%= row[0].range[0] %>" max="<%= row[0].range[1] %>" />
 
-			<% } else if(row[0].type=="loadSample") { %>
-					<input type="button" class="btn uploadFile" value="upload" />
-					<span> 4MB Max. </span>
-					<span class="fileInfo"></span>
 			<% } else { %>
 				<% _.each(row[0].values, function(btn) { %>
 					<input class="param" hidden readonly value="<%= row[0].param %>">
