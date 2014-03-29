@@ -77,7 +77,6 @@ define [
 
     initSynthParamEvents: ()->
       chSlider = (e)->
-        c.l "change val"
         parent = $(e.target.parentNode)
         param = parent.find(".param").val()
         val = parseFloat(e.target.value)
@@ -85,7 +84,6 @@ define [
         @model.osc[param](val)
         @model.synthParams[param]=val
       chNumVal = (e)->
-        c.l "change val"
         parent = $(e.target.parentNode)
         param = parent.find(".param").val()
         val = parseFloat(e.target.value)
@@ -107,18 +105,24 @@ define [
     initRealSynth: ()->
       if app.synthDev? then app.synthDev.kill()
       fxs = @model.fxs
+      cv = app.cv
       audioCallback= (buffer, channelCount) ->
         osc.append buffer, channelCount
         len = fxs.length; i=0
         while i<len
           fxs[i].fx.append buffer, channelCount
           i++
+        cv.clear()
+        cv.draw buffer, channelCount, "rgba(255,255,255, 0.9)"
+
 
       dev = audioLib.AudioDevice(audioCallback, 2, 1024<<2)
       dev.kill = ->
         dev.readFn = null
         dev.off()
         dev = null
+        cv.clear()
+
 
       osc = audioLib[@model.synth](dev.sampleRate, 440, 44, 0.005)
       len = @model.fxs.length; i=0

@@ -1,9 +1,0 @@
-<div id="<%- model.id %>">
-	<span>Name:
-		<input class="changeName" value="<%- model.name %>" type="text"</h2>
-	</span>
-	<select>
-		<option>Select Synth</option>
-		<% _.each(model.synths, function(synth) { %>  <option class="<%= synth.id %>"><%= synth.name %></option> <% }); %>
-	</select>
-</div>

@@ -28,16 +28,15 @@ define [
     findItem: (id, collection) ->
       _.findWhere(app.collections[ collection||@collectionName ], {"id":parseInt(id)})
 
-    render: ->
-      @target.html(@el)
+    render: (el)->
+      @target.html(el||@el)
       @initEvents()
       @el=""
 
     renderItem: (model, tpl) ->
-      tpl = tpl || @tpl
       _.templateSettings.variable = "model"
-      template = _.template(tpl)
-      template(model)
+      template = _.template tpl||@tpl
+      template model||@model
 
     renderAllItems: ()->
       that = @

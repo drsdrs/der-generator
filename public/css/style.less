@@ -1,0 +1,230 @@
+.hide {
+  opacity:0;
+  width: 0;
+  height: 0;
+  display: none;
+  transition: all 0.2s
+}
+
+.fullsize {
+  width:100%!important;
+  display: block;
+  transition: all 0.2s
+}
+
+body{
+  margin:0px;
+  background: black;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  -o-user-select: none;
+  user-select: none;
+}
+
+#backgroundImage {
+  transition: all 2s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -9999;
+  img {
+    transition: all 2s;
+    width: 123%;
+    height: 123%;
+    display: block;
+    opacity: 0.4;
+  }
+  h4 {
+    position: fixed;
+    z-index: 0;
+  }
+}
+
+
+#header {
+  position: fixed;
+  margin: -6px;
+  width: 100%;
+  top:0;
+  left:0;
+  h1 {
+    color: white;
+    position: fixed;
+    top: -22px;
+    left: 16px;
+  }
+  #canvasvisual {
+    width: 101%;
+    height: 70px;
+    background: black;
+    box-shadow: 0 3px 26px 15px black;
+  }
+}
+
+#navView {
+  //background: #ff8;
+  margin: 78px 0 0 0;
+  div {
+    display: inline-block;
+    padding: 6px 6px 0 6px;
+    margin: -2px 0px;
+    background: black;
+    color: white;
+  }
+}
+
+#listView {
+  background: #8AD19B;
+  display: inline-block;
+  float: left;
+  width: 30%;
+  max-width: 300px;
+  div {
+    border: 3px solid black;
+    border-top: 0;
+    padding: 6px;
+  }
+  h3 {
+    margin: 6px 2px;
+  }
+  a {
+    margin: -1px 2px 0px 0px;
+    border: 2px solid black;
+    padding: 1px;
+    color: #000;
+    background: #DDFAC7;
+    border-radius: 3px;
+  }
+}
+
+#navView {
+  clear: both;
+  background: #8AD19B;
+  border-bottom: 3px solid black;
+  div {
+    display: inline-block;
+    padding: 6px 6px 0 6px;
+    background: black;
+    color: white;
+  }
+}
+
+#detailView {
+  width: 70%;
+  background: #AB9FE9;
+  height: 100%;
+  float: left;
+  .drumSection {
+    .beatTrigger, .checkHeader{
+      width: 30px;
+      height: 30px;
+      margin: -1px -1px;
+      display: inline-block;
+      text-align: center;
+      border-left: 2px dotted rgb(75, 75, 75);
+      border-right: 2px dotted rgb(75, 75, 75);
+    }
+    .highlight { background: rgba(209, 209, 209, 0.5); }
+    .beatTrigger {
+      border-radius: 0 0 8px 8px;
+      border: 2px solid #4b4b4b;
+      border-top: 0;
+      /* border: inset 2px black; */
+      box-shadow: inset 0px 4px 6px 7px #888;
+    }
+
+    .velOff { background: #E4E4E4 }
+    .velLow { background: yellow }
+    .velMid { background: green }
+    .velHigh { background: red }
+
+    h4 {
+      width: 100px;
+      margin: 0px;
+      overflow: hidden;
+      display: inline-block;
+    }
+  }
+}
+
+.synthParamWrap, .synthFxWrap, .drumDetailList {
+  width: 100%;
+  display: inline-block;
+  .sCol {
+    width: 160px;
+    display: inline-block;
+    border-top:4px solid black;
+    float: left;
+
+    .synthParamGroup-A { background: #E68000; }
+    .synthParamGroup-B { background: #E69B00; }
+    .synthParamGroup-C { background: #E6B600; }
+    .synthParamGroup-D { background: #E6CD00; }
+    .synthParamGroup-E { background: #E6E400; }
+    .synthParamGroup-F { background: #9CE600; }
+    .synthParamGroup-G { background: #05FF9C; }
+
+    .sCell {
+      padding: 4px 8px 4px 4px;
+      //height: auto;
+      border:1px solid black;
+      text-align: center;
+
+      h4 { margin: 2px; }
+
+      input[type="button"]{
+        width: 45%;
+        height: 17.5px;
+        font-size: 10px;
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .waveInfo {
+        text-align: center;
+        border: 1px solid black;
+        background: rgba(0,0,0,0.2);
+        width: 90%;
+      }
+
+      .lowNum { float: left; }
+      .highNum { float: right; }
+      .fader { width:100%;  }
+      .numVal {
+        width: 50%;
+        text-align:center;
+        clear:both;
+      }
+    }
+  }
+}
+
+.drumDetailList {
+  .drumName {
+    margin: 0px;
+    background:black;
+    color:white;
+  }
+
+  .sCol {
+      float: none;
+  }
+  .sCell {
+      float: left;
+      height: 85px;
+      width: 146px;
+  }
+}
+
+.synthFxWrap {
+  .synthParamGroup-A { background: #E68; }
+  .synthParamGroup-B { background: #E69; }
+  .synthParamGroup-C { background: #E6B; }
+  .synthParamGroup-D { background: #E6C; }
+  .synthParamGroup-E { background: #E6E; }
+  .synthParamGroup-F { background: #9CE; }
+  .synthParamGroup-G { background: #05F; }
+}

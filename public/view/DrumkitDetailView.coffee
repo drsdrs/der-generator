@@ -20,7 +20,6 @@ define [
         @model.drumkitParams = null
         @showDetail()
         @initOtherEvents()
-      @target.find("#addEffect").click @addFx.bind(@)
       @target.find(".changeSynth").change setSynth.bind(@)
 
     showDetail: (model)->
@@ -59,19 +58,6 @@ define [
       else if k==52||k==82||k==70||k==86
         drums[3].gen.noteOn(360, 0.8)
         $('.'+drums[3].id+" h3").animate({width:"25%"}, 100, "swing", -> $(this).animate({width:"100%"}, 100) )
-
-
-    addFx: ->
-      name = @target.find(".selectFx").val()
-      gen = audioLib[name]
-      if !audioLib[name]? then return c.w "no such fx here"
-      fx =
-        id: (parseInt((1024^Math.random()*1024).toString()+Date.now().toString()))
-        name: namev
-        params: null
-        fx: gen()
-      @model.fxs.push(fx)
-
 
     renderSynthParams: (synth)->
       that = @
@@ -119,22 +105,22 @@ define [
     initRealSynth: ()->
       if app.synthDev? then app.synthDev.kill()
       drums = @model.drums
+      cv = app.cv
       #fxs = @model.fxs
       audioCallback= (buffer, channelCount) ->
-        #osc.append buffer, channelCount
         i = drums.length
         while i--
           drums[i].gen.append buffer, channelCount
+        cv.clear()
+        cv.draw buffer, channelCount, "rgba(255,128,255, 0.9)"
 
-          # while i<len
-            # fxs[i].fx.append buffer, channelCount
-            # i++
 
       dev = audioLib.AudioDevice(audioCallback, 2, 1024<<2)
       dev.kill = ->
         dev.readFn = null
         dev.off()
         dev = null
+        cv.clear()
 
       #osc = audioLib[@model.synth](dev.sampleRate, 440, 44, 0.005)
       # len = @model.fxs.length; i=0

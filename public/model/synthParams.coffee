@@ -50,7 +50,7 @@ define [], ()->
         type: "slider"
         range:[0.01, 880]
         step:0.01
-        value: 110
+        value: 88
       ]
     ]
   ]
@@ -64,8 +64,8 @@ define [], ()->
         colorG: "synthParamGroup-G"
         type: "slider"
         range:[0.01, 880]
-        step:0.01
-        value: 220
+        step: 0.01
+        value: 110
 
       ]
       [
@@ -73,9 +73,9 @@ define [], ()->
         param: "setDetune"
         colorG: "synthParamGroup-G"
         type: "slider"
-        range:[0.01, 44]
-        step:0.2
-        value: 10
+        range:[0.01, 12]
+        step: 0.01
+        value: 0.4
       ]
       [
         label: "OSC Volume"
@@ -84,7 +84,7 @@ define [], ()->
         type: "slider"
         range:[0, 1]
         step:0.01
-        value: 0.08
+        value: 0.04
       ]
     ]
     [
@@ -93,9 +93,9 @@ define [], ()->
         param: "setFreqOscPitch"
         colorG: "synthParamGroup-C"
         type: "slider"
-        range:[0.2, 44]
+        range:[0.2, 12]
         step:0.2
-        value: 4
+        value: 0.5
       ]
       [
         label: "OSC-Pitch Mix"
@@ -104,7 +104,7 @@ define [], ()->
         type: "slider"
         range:[0, 1]
         step:0.01
-        value: 1
+        value: 0.1
       ]
       [
         label: "OSC-Pitch Waveshape"
@@ -121,7 +121,7 @@ define [], ()->
         param: "setFreqOscAmp"
         colorG: "synthParamGroup-B"
         type: "slider"
-        range:[0.2, 44]
+        range:[0.2, 12]
         step:0.2
         value: 2
       ]
@@ -149,9 +149,9 @@ define [], ()->
         param: "setFreqOscPhase"
         colorG: "synthParamGroup-A"
         type: "slider"
-        range:[0.01, 44]
+        range:[0.01, 12]
         step:0.01
-        value: 1
+        value: 0.2
       ]
       [
         label: "OSC-Phase Mix"
@@ -160,7 +160,7 @@ define [], ()->
         type: "slider"
         range:[0, 1]
         step:0.01
-        value: 1
+        value: 0.7
       ]
       [
         label: "OSC-Phase Waveshape"
@@ -168,7 +168,7 @@ define [], ()->
         colorG: "synthParamGroup-A"
         type: "button"
         values: ["sine", "square", "pulse", "triangle", "sawtooth", "invSawtooth"]
-        value: "triangle"
+        value: "sawtooth"
       ]
     ]
     [
@@ -179,7 +179,7 @@ define [], ()->
         type: "slider"
         range:[0, 1]
         step:0.01
-        value: 1
+        value: 0.6
       ]
       [
         label: "OSC-A Waveshape"
@@ -187,7 +187,7 @@ define [], ()->
         colorG: "synthParamGroup-D"
         type: "button"
         values: ["sine", "square", "pulse", "triangle", "sawtooth", "invSawtooth"]
-        value: "sine"
+        value: "sawtooth"
       ]
     ]
     [
@@ -206,7 +206,7 @@ define [], ()->
         colorG: "synthParamGroup-E"
         type: "button"
         values: ["sine", "square", "pulse", "triangle", "sawtooth", "invSawtooth"]
-        value: "sawtooth"
+        value: "triangle"
       ]
     ]
     [

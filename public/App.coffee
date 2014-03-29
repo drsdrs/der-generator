@@ -20,13 +20,18 @@ define (require)->
   SeqDetailView =     require 'cs!./view/SeqDetailView'
   DrumkitDetailView = require 'cs!./view/DrumkitDetailView'
   NavView =           require 'cs!./view/NavView'
-  BoldView =          require 'cs!./view/NavView'
+
+  CanvasVisual =          require 'cs!./view/CanvasVisual'
 
   synthItemTpl = require 'text!./templates/synthItem.html'
   navViewTpl = require 'text!./templates/navItem.html'
 
   manualTpl = require 'text!./templates/manual.html'
-  style = require 'less!./style.less'
+
+  style = require 'less!./css/style.less'
+  fontstyle = require 'text!./css/font-awesome.min.css'
+
+  $("head").append("<style>"+fontstyle+"</style>")
 
   window.isEmpty = (obj) ->
     return true  unless obj?
@@ -44,41 +49,57 @@ define (require)->
   app.fxParams = fxParams
   app.navSelect = ""
 
+  cv = new CanvasVisual("canvasvisual")
+
+  app.cv = cv
+
   app.changeMainView = (navName) ->
     if app.navSelect == navName then return
-    navSelect = navName
-    $("#detailView").fadeOut 150, ->
-      $(@).html("").fadeIn(150)
-    $("#listView").fadeOut 150, ->
-      $(@).html("").fadeIn(150)
+    app.navSelect = navName
+    if navName=="hideList"
+      $("#listView").addClass("hide")
+      $("#detailView").addClass("fullsize")
+      return
+    else
+      if $("#listView").hasClass("hide")
+        $("#listView").removeClass("hide")
+        $("#detailView").removeClass("fullsize")
 
-      if navName=="synth"
-        app.listView = new ListView(
-          $("#listView"), "synths", synthItemTpl, Synth
-        )
-        app.detailView = new SynthDetailView($("#detailView") , "synths")
-        app.listView.initialize()
-        app.detailView.initEvents()
+      $("#detailView").fadeOut 50, ->
+        $(@).html("").fadeIn(250)
 
-      else if navName=="manual"
-        app.detailView = new DetailView($("#detailView"))
-        app.detailView.tpl = manualTpl
-        app.detailView.render()
+      $("#listView").fadeOut 50, ->
+        $(@).html("").fadeIn(250)
+        if navName=="synth"
+          app.listView = new ListView(
+            $("#listView"), "synths", synthItemTpl, Synth
+          )
+          app.detailView = new SynthDetailView($("#detailView") , "synths")
+          app.listView.initialize()
+          app.detailView.initEvents()
 
-      else if navName=="seq"
-        app.listView = new ListView($("#listView"), "seqs", synthItemTpl, Seq)
-        app.detailView = new SeqDetailView($("#detailView"), "seqs")
-        app.listView.initialize()
+        else if navName=="manual"
+          app.detailView = new DetailView($("#detailView"))
+          app.detailView.tpl = manualTpl
+          app.detailView.render()
 
-      else if navName=="drums"
-        app.listView = new ListView($("#listView"), "drumkits", synthItemTpl, Drumkit)
-        app.detailView = new DrumkitDetailView($("#detailView"), "drumkits")
-        app.listView.initialize()
+        else if navName=="seq"
+          app.listView = new ListView($("#listView"), "seqs", synthItemTpl, Seq)
+          app.detailView = new SeqDetailView($("#detailView"), "seqs")
+          app.listView.initialize()
+
+        else if navName=="drums"
+          app.listView = new ListView($("#listView"), "drumkits", synthItemTpl, Drumkit)
+          app.detailView = new DrumkitDetailView($("#detailView"), "drumkits")
+          app.listView.initialize()
+
+
 
   window.app = app
 
 
   app.collections.navs = [
+    new Nav("Hide List", "hideList")
     new Nav("Drums", "drums")
     new Nav("Synths", "synth")
     new Nav("Sequencers", "seq")
@@ -86,8 +107,8 @@ define (require)->
   ]
 
   app.collections.synths = [ new Synth("superSAWtooth") ]
-  app.collections.seqs = [ new Seq("seq-sequence-1") ]
   app.collections.drumkits = [ new Drumkit() ]
+  app.collections.seqs = [ new Seq("seq-sequence-1") ]
 
   app.navView = new NavView($("#navView"), "navs", navViewTpl)
   app.navView.initialize()
