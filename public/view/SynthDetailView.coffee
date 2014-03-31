@@ -103,7 +103,7 @@ define [
       @target.find(".sCell input[type='button']").click chParamButton.bind(@)
 
     initRealSynth: ()->
-      if app.synthDev? then app.synthDev.kill()
+      if app.dev? then app.dev.kill()
       fxs = @model.fxs
       cv = app.cv
       audioCallback= (buffer, channelCount) ->
@@ -130,7 +130,7 @@ define [
         @model.fxs[i].fx = audioLib[@model.fxs[i].name](dev.sampleRate)
         i++
 
-      app.synthDev = dev
+      app.dev = dev
       @model.osc = osc
       @setAllSynthParams(osc)
       @setAllFxParams()

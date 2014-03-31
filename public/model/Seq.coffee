@@ -10,7 +10,7 @@ define ['underscore'], (_) ->
 
       @drumGenerator =
         basicBeat:
-          width: 8
+          width: 16
           height: @selDrumkit.drums.length
           data: []
 
