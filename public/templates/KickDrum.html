@@ -1,0 +1,45 @@
+<div class="instrHolder" id="KickDrum">
+	<h3>
+		Simple Kick
+		<div class="toggleInstr"></div>
+		<div class="toggleSeq"></div>
+	</h3>
+
+	<div class="faderInputD3" size="100" param="totalVol" orientation="h" value="0.7" max="1" circleColor="rgba(255, 0, 0, 0.3)">
+		<h5>VOL</h5>
+	</div>
+	
+	<div class="seqInput" param="sequencer" steps="32" rows="4" >
+		<h5>Sequencer</h5>
+	</div>
+
+
+	<div class="btnInput vertical" size="100" orientation="v" param="oscA" paramB="waveShape" value="sine" values="sine triangle sawtooth square" color="rgba(128, 128, 255, 0.3)">
+		<h5>waveFormA</h5>
+	</div>
+
+	<div class="btnInput vertical" size="100" orientation="v" param="oscB" paramB="waveShape" value="sine" values="sine triangle sawtooth square" color="rgba(128, 128, 255, 0.3)">
+		<h5>waveFormB</h5>
+	</div>
+
+	<div class="faderInputD3" size="100" param="freqCurveA" orientation="h" value="0.0001" max="0.002" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>freqCurveA</h5>
+	</div>
+
+	<div class="faderInputD3" size="100" param="freqCurveB" orientation="h" value="0.0001" max="0.002" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>freqCurveB</h5>
+	</div>
+
+	<ul>
+		<li>
+			<div class="rotaryInputD3" size="40.5" param="startFreqA" value="1200" max="4000" circleColor="rgba(122, 0, 255, 0.3)">
+				<h5>startFreqA</h5>
+			</div>
+		</li><li>
+			<div class="rotaryInputD3" size="40.5" param="startFreqB" value="1200" max="4000" circleColor="rgba(122, 0, 255, 0.3)">
+				<h5>startFreqB</h5>
+			</div>
+		</li>
+	</ul>
+
+</div>

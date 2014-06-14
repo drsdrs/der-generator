@@ -1,0 +1,92 @@
+body {
+  background: #efe;
+}
+
+.clear {
+	clear: both;
+	display: inline-block;
+}
+.faderInputD3 ul, li, div {
+	list-style: none;
+	padding: 0;
+	margin: 1.5px 0 0 0;
+}
+
+ul {
+	display: inline-block;
+	padding: 0;
+	margin:0;
+}
+
+.instrHolder {
+	box-shadow: 1px 1px 6px 0px black;
+	border-radius: 2px;
+	width: 100%;
+	display: inline-block;
+	padding: 6px;
+	background: rgba(0, 0, 0, 0.05);
+	h3 {
+		display: block;
+		margin: 0;
+		background: rgba(0, 0, 0, 0.6);
+		color: white;
+		padding: 4px 8px;
+		font-size: 18px;
+	}
+
+	.toggleInstr, .toggleSeq {
+		width: 0px;
+		height: 0px;
+		border-style: solid;
+		border-width: 17.3px 10px 0 10px;
+		border-color: #00afef transparent transparent transparent;
+		float: right;
+		margin-right: 6px;
+		-webkit-transition: all 200ms ease-in-out;
+		-moz-transition: all 200ms ease-in-out;
+		-ms-transition: all 200ms ease-in-out;
+		-o-transition: all 200ms ease-in-out;
+		transition: all 200ms ease-in-out;
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		transform: rotate(0deg); 
+	}
+	.toggleSeq {
+		border-color: #afef00 transparent transparent transparent;
+	}
+}
+.seqInput, .btnInput { margin-top: 6px; }
+
+.rotaryInputD3, .lineInputD3, .faderInputD3, .seqInput, .btnInput {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.05);
+  float:left;
+  margin: 6px 4px;
+  h5 {
+    margin: 2px 0 0 0;
+    text-align: center;
+  }
+
+
+}
+.faderInputD3[orientation=h] h5{
+	-moz-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+	 /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+
+  /* Should be unset in IE9+ I think. */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  position: absolute;
+	width: 0;
+	height: 0;
+}

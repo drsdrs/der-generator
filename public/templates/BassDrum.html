@@ -1,0 +1,57 @@
+<div class="instrHolder" id="BassDrum">
+	<h3>
+		BassDrum
+		<div class="toggleInstr"></div>
+		<div class="toggleSeq"></div>
+	</h3>
+
+	<div class="faderInputD3" size="100" param="totalVol" orientation="h" value="0.7" max="1" circleColor="rgba(255, 0, 0, 0.3)">
+		<h5>VOL</h5>
+	</div>
+	
+	<div class="seqInput" param="sequencer" steps="32" rows="4" >
+		<h5>Sequencer</h5>
+	</div>
+	<div class="lineInputD3" size="100" param="freqLineA" circleColor="rgba(0, 255, 255, 0.3)"
+		max="1" >
+		<h5>freqLineA</h5>
+	</div>
+	<div class="clear"></div>
+
+	<div class="lineInputD3" size="100" param="freqLineB" circleColor="rgba(255, 255, 0, 0.3)"
+		max="1" >
+		<h5>freqLineB</h5>
+	</div>
+	<div class="clear"></div>
+	
+	<div class="faderInputD3" size="100" param="freqLineA" paramB="length" orientation="h" value="" max="1" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>LineA-Length</h5>
+	</div>
+	<div class="clear"></div>
+
+	<div class="faderInputD3" size="100" param="freqLineB" paramB="length" orientation="h" value="" max="1" circleColor="rgba(122, 64, 255, 0.3)">
+		<h5>LineB-Length</h5>
+	</div>
+	<div class="clear"></div>
+
+
+	<div class="btnInput vertical" size="100" orientation="v" param="oscA" paramB="waveShape" value="sine" values="sine triangle sawtooth square" color="rgba(128, 128, 255, 0.3)">
+		<h5>waveFormA</h5>
+	</div>
+	<div class="clear"></div>
+
+
+	<ul>
+		<li>
+			<div class="rotaryInputD3" size="40.5" param="startFreq" value="200" max="600" circleColor="rgba(122, 0, 255, 0.3)">
+				<h5>startFreq</h5>
+			</div>
+		</li><li>
+			<div class="rotaryInputD3" size="40.5" param="endFreq" value="0" max="100" circleColor="rgba(0, 122, 255, 0.3)">
+				<h5>endFreq</h5>
+			</div>
+		</li>
+	</ul>
+	<div class="clear"></div>
+
+</div>

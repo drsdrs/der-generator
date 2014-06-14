@@ -4,10 +4,10 @@ define [], ->
       @canvas = document.getElementById(el)
       @context = @canvas.getContext("2d")
       @width = @canvas.width = 1023
-      @height = @canvas.height = 70
+      @height = @canvas.height = 128
       @canvas.width = @width
-      @zoom = 2
-      @speed = 2
+      @zoom = 0.9
+      @speed = 1
       @halt = false
 
       #document.body.appendChild @canvas
@@ -24,15 +24,12 @@ define [], ->
       @context.fillRect(0,0, @width, @height);
       @context.stroke();
 
-    drawBuff: (buffer, channelCount, color) ->
-
-
     draw: (buffer, channelCount, color)->
       #@buffer = buffer
       if @halt==true then return
       @context.beginPath()
       @context.strokeStyle = color
-      @context.lineWidth = 2
+      @context.lineWidth = 1.2
       i = 0
       len = buffer.length
       p = (@width / len)*@speed

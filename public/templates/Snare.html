@@ -1,0 +1,50 @@
+<div class="instrHolder" id="Snare">
+	<h3>
+		Snare
+		<div class="toggleInstr"></div>
+		<div class="toggleSeq"></div>
+	</h3>
+
+	<div class="faderInputD3" size="100" param="totalVol" orientation="h" value="0.7" max="1" circleColor="rgba(255, 0, 0, 0.3)">
+		<h5>VOL</h5>
+	</div>
+
+	<div class="seqInput" param="sequencer" steps="16" rows="4" >
+		<h5>Sequencer</h5>
+	</div>
+
+	<div class="faderInputD3" size="100" param="freqCurveA" orientation="h" value="0.0001" max="0.001" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>freqCurveOsc</h5>
+	</div>
+	<div class="btnInput vertical" size="100" orientation="v" param="oscA" paramB="waveShape" value="sine" values="sine triangle sawtooth square" color="rgba(128, 128, 255, 0.3)">
+		<h5>waveFormA</h5>
+	</div>
+
+	<div class="faderInputD3" size="100" param="freqCurveB" orientation="h" value="0.00005" max="0.0005" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>freqCurveLPFilter</h5>
+	</div>
+
+	<div class="btnInput vertical" size="100" orientation="v" param="oscB" paramB="color" value="white" values="pink brown white" color="rgba(128, 128, 255, 0.3)">
+		<h5>Noise Color</h5>
+	</div>
+	<div class="faderInputD3" size="100" param="delay" paramB="time" orientation="h" value="1" max="500" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>time</h5>
+	</div>
+
+	<div class="faderInputD3" size="100" param="delay" paramB="feedback" orientation="h" value="0.3" max="0.6" circleColor="rgba(0, 255, 0, 0.3)">
+		<h5>feedback</h5>
+	</div>
+
+	<ul>
+		<li>
+			<div class="faderInputD3" orientation="v" size="100" param="startFreqA" value="1200" max="4000" circleColor="rgba(122, 0, 255, 0.3)">
+				<h5>startFreqA</h5>
+			</div>
+		</li><li>
+			<div class="faderInputD3" orientation="v" size="100" param="startFreqB" value="1200" max="8000" circleColor="rgba(122, 0, 255, 0.3)">
+				<h5>startFreqB</h5>
+			</div>
+		</li>
+	</ul>
+
+</div>
